@@ -8,20 +8,30 @@ class App extends Component {
   constructor() {
     super();
 
-    this.state = [
-      {
-        name: "Push Ups",
-        sets: "3",
-        reps: "10",
-        ytUrl: "https://www.youtube.com/watch?v=_l3ySVKYVJ8",
-      },
-    ];
+    this.state = {
+      exercises: [
+        {
+          name: "Push Ups",
+          sets: "5",
+          reps: "10",
+          ytUrl: "https://www.youtube.com/watch?v=_l3ySVKYVJ8",
+        },
+        {
+          name: "Squats",
+          sets: "5",
+          reps: "10",
+          ytUrl: "https://www.youtube.com/watch?v=ultWZbUMPL8",
+        },
+      ],
+    };
   }
 
   render() {
     return (
       <div className="App">
-        <ExerciseCard {...this.state[0]} />
+        {this.state.exercises.map((exercise) => (
+          <ExerciseCard {...exercise} />
+        ))}
       </div>
     );
   }
