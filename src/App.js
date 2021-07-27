@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import { Grid } from "@material-ui/core";
 import "./App.css";
 
 import ExerciseCard from "./components/exercise/exercise.component";
+import WorkoutTable from "./components/workout/workout-table.component";
+import YoutubeEmbed from "./components/youtube-embed/youtube-embed.component";
+import PrimarySearchAppBar from "./components/app-bar/app-bar.component";
 
 class App extends Component {
 	constructor() {
@@ -10,11 +14,25 @@ class App extends Component {
 		this.state = {
 			exercises: [
 				{
+					id: "1",
 					name: "Push Ups",
 					movement: "upper-push",
 					types: ["strength", "stability"],
 					contractionType: "concentric",
 					ytUrl: "https://www.youtube.com/watch?v=_l3ySVKYVJ8",
+					isUnilateral: "Bilateral",
+				},
+			],
+			logExercises: [
+				{
+					exerciseId: "1",
+					sets: 3,
+					countAmount: 10,
+					countType: "reps", // can be reps, time, distance
+					timeUnit: null, // can be sec, min, hr
+					distanceUnit: null, // in, ft, m, mile, yard,
+					weightUnit: "BW",
+					weight: null,
 				},
 			],
 		};
@@ -29,7 +47,7 @@ class App extends Component {
 	}
 
 	render() {
-		const data = {
+		const exerciseInfo = {
 			name: "Power Push Ups",
 			movement: "upper-push",
 			types: ["strength", "stability"],
@@ -37,14 +55,22 @@ class App extends Component {
 			ytUrl: "https://www.youtube.com/watch?v=_l3ySVKYVJ8",
 		};
 
+		const logExercise = {
+			exercise: exerciseInfo,
+			sets: 3,
+			count: "reps", // can be reps, time, distance
+			timeUnit: null, // can be sec, min, hr
+			distanceUnit: null, // in, ft, m, mile, yard,
+			weightUnit: "BW",
+			weight: 1,
+		};
+
 		console.log(this.state.exercises);
 
 		return (
 			<div className="App">
-				{this.state.exercises.map((exercise) => (
-					<ExerciseCard {...exercise} />
-				))}
-				<button onClick={() => this.addExercise(data)}>Create Exercise</button>
+				<PrimarySearchAppBar />
+				<WorkoutTable className="table" />
 			</div>
 		);
 	}
